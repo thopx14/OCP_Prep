@@ -70,7 +70,7 @@ public class OS implements Comparable<OS> {
         }
 
     }
-    
+
     public static void main( String[] args ) {
         OS[] osses = {
                 new OS( "Linux", 3 ),
@@ -101,7 +101,7 @@ public class OS implements Comparable<OS> {
         System.out.println( "----------------" );
         OS.printOs( osses );
         System.out.println();
-        int key2 = Arrays.binarySearch( osses, new OS( "Windows", 95 ), new OS.OSComparator().reversed() );
+        int key2 = Arrays.binarySearch( osses, new OS( "Windows", 95 ), new OSComparator().reversed() );
         if ( key2 >= 0 ) {
             System.out.println( "Found \"Windows 95 \" at position: " + key2 );
         }
