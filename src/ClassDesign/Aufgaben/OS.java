@@ -48,7 +48,7 @@ public class OS implements Comparable<OS> {
     public int compareTo( OS o ) {
         int cmp = this.name.compareTo( o.getName() );
         if ( cmp == 0 ) {
-            cmp = this.version - o.version;
+            cmp = Integer.compare( version, o.version );
         }
         return cmp;
     }
@@ -59,7 +59,7 @@ public class OS implements Comparable<OS> {
         public int compare( OS o1, OS o2 ) {
             int cmp = o1.getName().compareTo( o2.getName() );
             if ( cmp == 0 ) {
-                cmp = o1.getVersion() - o2.getVersion();
+                cmp = Integer.compare( o1.getVersion(), o2.getVersion() );
             }
             return cmp;
         }
@@ -70,8 +70,7 @@ public class OS implements Comparable<OS> {
         }
 
     }
-
-
+    
     public static void main( String[] args ) {
         OS[] osses = {
                 new OS( "Linux", 3 ),
@@ -84,7 +83,7 @@ public class OS implements Comparable<OS> {
         System.out.println( "Sorting Array in ascending order:" );
         Arrays.sort( osses, new OSComparator() );
         System.out.println( "----------------" );
-        System.out.println( "Sorted ClassDesign.Aufgaben.OS:" );
+        System.out.println( "Sorted OS:" );
         System.out.println( "----------------" );
         OS.printOs( osses );
 
@@ -98,16 +97,19 @@ public class OS implements Comparable<OS> {
 
         Arrays.sort( osses, new OSComparator().reversed() );
         System.out.println( "----------------" );
-        System.out.println( "Reversed sorted ClassDesign.Aufgaben.OS:" );
+        System.out.println( "Reversed sorted OS:" );
         System.out.println( "----------------" );
         OS.printOs( osses );
+        System.out.println();
         int key2 = Arrays.binarySearch( osses, new OS( "Windows", 95 ), new OS.OSComparator().reversed() );
         if ( key2 >= 0 ) {
             System.out.println( "Found \"Windows 95 \" at position: " + key2 );
         }
 
         System.out.println();
-        System.out.println( "Shuffled ClassDesign.Aufgaben.OS:" );
+        System.out.println( "----------------" );
+        System.out.println( "Shuffled OS:" );
+        System.out.println( "----------------" );
         OS.shuffle( osses );
         OS.printOs( osses );
     }
