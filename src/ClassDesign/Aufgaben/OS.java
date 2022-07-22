@@ -1,4 +1,4 @@
-package ClassDesign.Aufgaben;
+package classdesign.aufgaben;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -55,16 +55,16 @@ public class OS implements Comparable<OS> {
 
 
     public static void main( String[] args ) {
-    	
-        Comparator<OS> cmpNatural = (o1, o2) -> {
-        	int cmp = o1.getName().compareTo( o2.getName() );
+
+        Comparator<OS> cmpNatural = ( o1, o2 ) -> {
+            int cmp = o1.getName().compareTo( o2.getName() );
             if ( cmp == 0 ) {
                 cmp = Integer.compare( o1.getVersion(), o2.getVersion() );
             }
             return cmp;
         };
-    	
-    	OS[] osses = {
+
+        OS[] osses = {
                 new OS( "Linux", 3 ),
                 new OS( "Windows", 95 ),
                 new OS( "MAC", 9 ),
@@ -72,15 +72,15 @@ public class OS implements Comparable<OS> {
         };
 
         OS.printOs( osses );
-        
+
         System.out.println();
         System.out.println( "Sorting Array in ascending order:" );
         Arrays.sort( osses, cmpNatural );
-        
+
         System.out.println( "----------------" );
         System.out.println( "Sorted OS:" );
         System.out.println( "----------------" );
-        
+
         OS.printOs( osses );
 
         int key = Arrays.binarySearch( osses, new OS( "Linux", 1 ) );
@@ -92,12 +92,12 @@ public class OS implements Comparable<OS> {
         System.out.println();
 
         Arrays.sort( osses, cmpNatural.reversed() );
-        
+
         System.out.println( "----------------" );
         System.out.println( "Reversed sorted OS:" );
         System.out.println( "----------------" );
         OS.printOs( osses );
-        
+
         System.out.println();
         int key2 = Arrays.binarySearch( osses, new OS( "Windows", 95 ), cmpNatural.reversed() );
         if ( key2 >= 0 ) {
@@ -110,5 +110,6 @@ public class OS implements Comparable<OS> {
         System.out.println( "----------------" );
         OS.shuffle( osses );
         OS.printOs( osses );
+        
     }
 }
