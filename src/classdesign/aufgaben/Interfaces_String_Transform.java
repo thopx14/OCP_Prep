@@ -1,7 +1,9 @@
 package classdesign.aufgaben;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 
 interface Transformable<T> {
@@ -85,6 +87,21 @@ public class Interfaces_String_Transform {
 		transform(arr, t2, s -> sb.append(s));
 		System.out.println(sb); // [om, id, im]
 		
+		List<String> l = new ArrayList<>();
+		l.add("Mo");
+		l.add("Die");
+		l.add("Mi");
+		l.add("Do");
+		l.add("Fr");
+		l.add("Sa");
+		l.add("So");
+		
+		List<String> l2 = new ArrayList<>();
+		
+		transform(l, s -> s.startsWith("M"), s -> l2.add(s.toUpperCase()));
+		
+		System.out.println(l2);
+		
 	}
 	
 	/*
@@ -110,5 +127,15 @@ public class Interfaces_String_Transform {
 	 */
 	static <T> void transform(String[] strs, Transformable<T> t, Consumer<T> consumer) {
 		consumer.accept(t.transform(strs));
+	}
+	
+	/*
+	 * Own method:
+	 */
+	static <T> void transform(List<T> l, Predicate<T> p, Consumer<T> c) {
+		for (T t : l) {
+			if(p.test(t))
+				c.accept(t);
+		}			
 	}
 }
