@@ -3,6 +3,7 @@ package classdesign.aufgaben;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 
@@ -102,6 +103,12 @@ public class Interfaces_String_Transform {
 		
 		System.out.println(l2);
 		
+		
+		List<String> l3 = transform2(l, s -> s.toUpperCase());
+		System.out.println(l3);
+		
+		l3 = transform2(l, s -> new StringBuilder(s).reverse().toString());
+		System.out.println(l3);
 	}
 	
 	/*
@@ -137,5 +144,13 @@ public class Interfaces_String_Transform {
 			if(p.test(t))
 				c.accept(t);
 		}			
+	}
+	
+	static <T> List<T> transform2(List<T> l, Function<T, T> f) {
+		List<T> tList = new ArrayList<>();
+		for (T t : l) {
+			tList.add(f.apply(t));
+		}			
+		return tList;
 	}
 }
