@@ -5,6 +5,10 @@ public class Singleton {
 	private static Singleton INSTANCE;
 	private static int instanceCount = 0;
 	
+	/*
+	 * Wenn der Block auskommentiert wird,
+	 * dann entstehen mehr als eine Instanz in einer Multithread-Umgebung!
+	 */
 	static {
 		instanceCount++;
 		INSTANCE = new Singleton();
