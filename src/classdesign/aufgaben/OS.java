@@ -110,6 +110,6 @@ public class OS implements Comparable<OS> {
         System.out.println( "----------------" );
         OS.shuffle( osses );
         OS.printOs( osses );
-        
+
     }
 }
