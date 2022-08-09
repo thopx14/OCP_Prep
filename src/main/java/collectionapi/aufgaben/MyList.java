@@ -2,13 +2,13 @@ package collectionapi.aufgaben;
 
 import java.util.Iterator;
 
-class MyList<T> implements Iterable<T> {
+public class MyList<T> implements Iterable<T> {
 
-    Object[] arr;
+    private final Object[] arr;
     private int cnt;
     private static final int MAX_CONTAINER_SIZE = 10;
 
-    MyList() {
+    public MyList() {
         arr = new Object[MAX_CONTAINER_SIZE];
         cnt = 0;
     }
@@ -29,7 +29,7 @@ class MyList<T> implements Iterable<T> {
 
 
     @SafeVarargs
-    MyList( T... elements ) {
+    public MyList( T... elements ) {
         this();
 
         if ( elements.length >= MAX_CONTAINER_SIZE ) {
@@ -45,7 +45,7 @@ class MyList<T> implements Iterable<T> {
     }
 
 
-    void add( T element ) throws IndexOutOfBoundsException {
+    public void add( T element ) throws IndexOutOfBoundsException {
         if ( checkBounds() )
             throw new IndexOutOfBoundsException( "Cannot add more than: " + MAX_CONTAINER_SIZE + " elements!" );
 
@@ -53,8 +53,8 @@ class MyList<T> implements Iterable<T> {
     }
 
     @SuppressWarnings("unchecked")
-    void add( T... el ) throws IndexOutOfBoundsException {
-        if ( ! checkBounds() )
+    public void add( T... el ) throws IndexOutOfBoundsException {
+        if ( checkBounds() )
             throw new IndexOutOfBoundsException( "Cannot add more than: " + MAX_CONTAINER_SIZE + " elements!" );
 
         for ( T t : el ) {
@@ -62,12 +62,12 @@ class MyList<T> implements Iterable<T> {
         }
     }
 
-    int size() {
+    public int size() {
         return cnt;
     }
 
     @SuppressWarnings("unchecked")
-    T get( int idx ) {
+    public T get( int idx ) {
         if ( idx >= 0 && idx < MAX_CONTAINER_SIZE )
             return ( T ) arr[idx];
 
@@ -82,7 +82,7 @@ class MyList<T> implements Iterable<T> {
 
             @Override
             public boolean hasNext() {
-                return internCnt < MAX_CONTAINER_SIZE;
+                return internCnt < MAX_CONTAINER_SIZE && arr[internCnt] != null;
             }
 
             @SuppressWarnings("unchecked")
@@ -91,49 +91,5 @@ class MyList<T> implements Iterable<T> {
                 return ( T ) arr[internCnt++];
             }
         };
-    }
-}
-
-public class List_Iterable {
-
-    public static void main( String[] args ) {
-
-        MyList<String> myListString = new MyList<>( "Hallo", "1", "2", "3", "Welt" );
-        myListString.add( "Blubb" );
-        myListString.add( "Klaus" );
-        myListString.add( "Haus" );
-        myListString.add( "Bärbel" );
-        myListString.add( "Hans" );
-        //		myListString.add("asdasdasd"); // IndexOutOfBoundsException: Cannot add more than: 10 elements
-
-        System.out.println( myListString.size() ); // 10
-        System.out.println( myListString.get( 0 ) ); // Hallo
-        //		System.out.println(myListString.get(10)); // IndexOutOfBoundsException
-        //		System.out.println(myListString.get(-1)); // IndexOutOfBoundsException
-
-        System.out.println();
-        /*
-         * 1.
-         */
-        for ( String string : myListString ) {
-            System.out.println( string );
-        }
-
-        System.out.println();
-
-        /*
-         * 2.
-         */
-        Iterator<String> iter = myListString.iterator();
-        while ( iter.hasNext() ) {
-            System.out.println( iter.next() );
-        }
-
-        System.out.println();
-
-        /*
-         * 3.
-         */
-        iter.forEachRemaining( System.out::println );
     }
 }
