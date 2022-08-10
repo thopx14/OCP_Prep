@@ -38,4 +38,17 @@ public class MirrorTests {
         mirror.remove();
         Assertions.assertEquals( "dcba|abcd", mirror.toString() );
     }
+
+    @Test
+    void testCallingRemoveOnAnEmptyMirror() {
+        while ( ! mirror.isEmpty() ) {
+            mirror.remove();
+        }
+
+        //This method should never throw anything!
+        Assertions.assertDoesNotThrow( mirror::remove );
+
+        // The expected output should be "".
+        Assertions.assertEquals( "", mirror.toString() );
+    }
 }
