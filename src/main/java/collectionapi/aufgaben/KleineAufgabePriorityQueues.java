@@ -1,9 +1,6 @@
 package collectionapi.aufgaben;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
 
 public class KleineAufgabePriorityQueues {
     public static void main( String[] args ) {
@@ -23,18 +20,23 @@ public class KleineAufgabePriorityQueues {
         /*
          A2
          */
+        StringJoiner sj = new StringJoiner( ", " );
         while ( ! q.isEmpty() ) {
-            System.out.printf( "%s ", q.poll() ); // -5 -2 0 12 12 22 77
+            sj.add( q.poll() + "" );
         }
 
-        System.out.println( "\nq.size() = " + q.size() ); // 0
+        System.out.println( sj );
+        System.out.println( "q.size() = " + q.size() ); // 0
 
         Queue<Integer> q2 = new LinkedList<>( Arrays.asList( 1, 5, 8, 22, 101, 2, 33, 55 ) );
         System.out.println( q2 ); // [1, 5, 8, 22, 101, 2, 33, 55]
 
+        sj = new StringJoiner( ", " );
         while ( ! q2.isEmpty() ) {
-            System.out.printf( "%d ", q2.remove() ); // 1 5 8 22 101 2 33 55
+            sj.add( q2.remove() + "" );
         }
-        System.out.println( "\n" + q2 ); // []
+
+        System.out.println( sj );
+        System.out.println( q2 ); // []
     }
 }
