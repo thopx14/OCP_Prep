@@ -1,4 +1,4 @@
-package collectionapi.aufgaben;
+package collectionapi.aufgaben.set;
 
 import java.util.Comparator;
 import java.util.SortedSet;
@@ -16,7 +16,7 @@ public class MyLittleTreeSet {
             /*
              Nur einzigartige Elemente hinzufügen.
              */
-            while ( ! set.add( randomNr ) ) { // 'true' if the element is not in the list, 'false' otherwise!
+            while ( !set.add( randomNr ) ) { // 'true' if the element is not in the list, 'false' otherwise!
                 randomNr = ( int ) ( fromIncl + Math.round( Math.random() * ( toExcl - fromIncl ) ) );
             }
 

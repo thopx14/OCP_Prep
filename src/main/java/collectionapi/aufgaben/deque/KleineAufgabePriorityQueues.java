@@ -1,4 +1,4 @@
-package collectionapi.aufgaben;
+package collectionapi.aufgaben.deque;
 
 import java.util.*;
 
@@ -10,9 +10,9 @@ public class KleineAufgabePriorityQueues {
          */
         Queue<Integer> q = new PriorityQueue<>();
         q.add( 12 );
-        q.add( - 5 );
+        q.add( -5 );
         q.add( 22 );
-        q.add( - 2 );
+        q.add( -2 );
         q.add( 0 );
         q.add( 77 );
         q.add( 12 );
@@ -21,7 +21,7 @@ public class KleineAufgabePriorityQueues {
          A2
          */
         StringJoiner sj = new StringJoiner( ", " );
-        while ( ! q.isEmpty() ) {
+        while ( !q.isEmpty() ) {
             sj.add( q.poll() + "" );
         }
 
@@ -32,7 +32,7 @@ public class KleineAufgabePriorityQueues {
         System.out.println( q2 ); // [1, 5, 8, 22, 101, 2, 33, 55]
 
         sj = new StringJoiner( ", " );
-        while ( ! q2.isEmpty() ) {
+        while ( !q2.isEmpty() ) {
             sj.add( q2.remove() + "" );
         }
 

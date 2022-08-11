@@ -1,4 +1,4 @@
-package collectionapi.aufgaben;
+package collectionapi.aufgaben.deque;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;
@@ -22,7 +22,7 @@ public class PalindromeChecker {
 
         boolean isPalindrom = false;
 
-        while ( ! deque.isEmpty() ) {
+        while ( !deque.isEmpty() ) {
             Character head = deque.pollFirst();
             Character tail = deque.pollLast();
 
@@ -31,7 +31,7 @@ public class PalindromeChecker {
             }
 
             // No chance to have a palindrom here, so we break and return immediately!
-            if ( ! isPalindrom )
+            if ( !isPalindrom )
                 break;
         }
 

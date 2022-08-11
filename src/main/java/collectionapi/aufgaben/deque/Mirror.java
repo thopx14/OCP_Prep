@@ -1,4 +1,4 @@
-package collectionapi.aufgaben;
+package collectionapi.aufgaben.deque;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -9,6 +9,7 @@ public class Mirror {
 
     public Mirror() {
         deque = new ArrayDeque<>();
+        deque.addLast( '|' );
     }
 
     public void add( char c ) {
@@ -17,10 +18,13 @@ public class Mirror {
     }
 
     public boolean isEmpty() {
-        return deque.isEmpty();
+        return deque.size() == 1;
     }
 
-    public void remove() {
+    public void remove() throws IllegalStateException {
+        if ( isEmpty() ) {
+            throw new IllegalStateException( "Mirror list is empty!" );
+        }
         deque.pollFirst();
         deque.pollLast();
     }
@@ -29,12 +33,7 @@ public class Mirror {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        int breakDelimiter = deque.size() / 2;
-        int cnt = 0;
-
         for ( Character character : deque ) {
-            if ( cnt++ == breakDelimiter )
-                sb.append( "|" );
             sb.append( character );
         }
         return sb.toString();

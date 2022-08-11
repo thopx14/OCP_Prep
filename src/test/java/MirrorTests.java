@@ -1,4 +1,4 @@
-import collectionapi.aufgaben.Mirror;
+import collectionapi.aufgaben.deque.Mirror;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,10 +25,10 @@ public class MirrorTests {
 
     @Test
     void testRemoveMethodEmptyOutput() {
-        while ( ! mirror.isEmpty() ) {
+        while ( !mirror.isEmpty() ) {
             mirror.remove();
         }
-        Assertions.assertEquals( "", mirror.toString() );
+        Assertions.assertEquals( "|", mirror.toString() );
     }
 
 
@@ -41,14 +41,14 @@ public class MirrorTests {
 
     @Test
     void testCallingRemoveOnAnEmptyMirror() {
-        while ( ! mirror.isEmpty() ) {
+        while ( !mirror.isEmpty() ) {
             mirror.remove();
         }
 
         //This method should never throw anything!
-        Assertions.assertDoesNotThrow( mirror::remove );
+        Assertions.assertThrows( IllegalStateException.class, mirror::remove );
 
         // The expected output should be "".
-        Assertions.assertEquals( "", mirror.toString() );
+        Assertions.assertEquals( "|", mirror.toString() );
     }
 }

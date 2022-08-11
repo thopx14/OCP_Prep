@@ -1,4 +1,4 @@
-import collectionapi.aufgaben.MyLittleTreeSet;
+import collectionapi.aufgaben.set.MyLittleTreeSet;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

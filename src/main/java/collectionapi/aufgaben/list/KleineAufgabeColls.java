@@ -1,4 +1,4 @@
-package collectionapi.aufgaben;
+package collectionapi.aufgaben.list;
 
 import java.util.ArrayList;
 import java.util.Collections;

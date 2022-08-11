@@ -1,4 +1,4 @@
-package collectionapi.aufgaben;
+package collectionapi.aufgaben.deque;
 
 public class Deque_Mirror {
     public static void main( String[] args ) {
@@ -20,7 +20,7 @@ public class Deque_Mirror {
         }
 
         System.out.println();
-        while ( ! m.isEmpty() ) {
+        while ( !m.isEmpty() ) {
             System.out.println( m );
             m.remove();
             /*
@@ -33,5 +33,7 @@ public class Deque_Mirror {
                 a|a
              */
         }
+
+        //        m.remove(); // java.lang.IllegalStateException: Mirror list is empty!
     }
 }

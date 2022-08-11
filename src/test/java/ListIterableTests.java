@@ -1,4 +1,4 @@
-import collectionapi.aufgaben.MyList;
+import collectionapi.aufgaben.list.MyList;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
