@@ -18,6 +18,10 @@ public class TextStatistics {
     public static TextStatistics of( String text ) {
         return new TextStatistics( text );
     }
+    
+    public String getText() {
+        return text;
+    }
 
     public Collection<Character> getUniqueChars() {
         return text.chars().mapToObj( s -> (char) s )
