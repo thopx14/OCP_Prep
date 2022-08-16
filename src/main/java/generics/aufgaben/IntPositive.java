@@ -9,17 +9,17 @@ import java.util.function.Supplier;
 public class IntPositive {
 
     private static <T extends Exception> void checkAndThrow(boolean check, Supplier<T> s) throws T {
-	if (!check) {
-	    throw s.get();
-	}
+        if (!check) {
+            throw s.get();
+        }
     }
 
     void setValue(int value) {
-	checkAndThrow(value > 0, IllegalArgumentException::new);
+        checkAndThrow(value > 0, IllegalArgumentException::new);
     }
 
     void writeValue(int value) throws IOException {
-	checkAndThrow(value > 0, java.io.IOException::new);
+        checkAndThrow(value > 0, java.io.IOException::new);
     }
 
 } // end of IntPositive
