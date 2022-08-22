@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.UnaryOperator;
 
 public class CollectionsFunctional {
@@ -55,14 +56,11 @@ public class CollectionsFunctional {
         System.out.println( integers3 ); // [8, 7, 6, 5, 4, 3, 2, 1]
 
         integers3 = new ArrayList<>( List.of( 1, 2, 3, 4, 5, 6, 7, 8 ) );
-        Integer[] sumOfIntegers3 = { 0 };
+        AtomicInteger ai = new AtomicInteger();
 
-        integers3.forEach( i -> {
-            if ( i > 0 )
-                sumOfIntegers3[0] += i;
-        } );
+        integers3.forEach( i -> ai.addAndGet( i ) );
 
-        System.out.println( sumOfIntegers3[0] ); // 36
+        System.out.println( ai.get() ); // 36
 
         int sum = integers3.stream().mapToInt( i -> i ).sum();
         System.out.println( sum ); // 36
