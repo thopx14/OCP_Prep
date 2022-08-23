@@ -3,8 +3,7 @@ package streams.aufgaben;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 import java.util.stream.Stream;
 
 public class StreamBilden {
@@ -14,7 +13,7 @@ public class StreamBilden {
         List<Integer> list2 = Arrays.asList(55, 77);
 
         // A
-        List<List<Integer>> list3 = Arrays.asList(list1, list2);
+//        List<List<Integer>> list3 = Arrays.asList(list1, list2);
 //        for ( List<Integer> e : list3 ) {
 //            System.out.println( "size = " + e.size() + ". elements = " + e );
 //        }
@@ -22,8 +21,9 @@ public class StreamBilden {
          * ###### A1.
          */
         System.out.println("*** A1:");
-        list3.stream()
-            .forEach( l -> System.out.println("size= " + l.size() + ". elements = " + l) );
+        Stream.of(list1, list2) // Stream<List<Integer>>
+            .map( list -> "size= " + list.size() + ". elements = " + list ) // Stream<String>
+            .forEach(System.out::println);
         // B
 
         /*
@@ -34,7 +34,8 @@ public class StreamBilden {
 //        }
 
         System.out.println("*** A2:");
-        Stream.generate( () -> new Random().nextInt() ).limit(100)
+        Stream.generate( () -> new Random().nextInt() )
+            .limit(100)
             .forEach(System.out::println);
 
         /*
@@ -83,18 +84,28 @@ public class StreamBilden {
 //            System.out.println(s);
 //        }
         
-        AtomicInteger ai = new AtomicInteger(96); // Ein Zeichen vor: 'a'
-        StringBuilder sb = new StringBuilder();
-        
-        Supplier<String> supplier = () -> {
-            sb.append("/" + (char) ai.incrementAndGet());
-            return sb.toString();
-        };
+//        AtomicInteger ai = new AtomicInteger(96); // Ein Zeichen vor: 'a'
+//        StringBuilder sb = new StringBuilder();       
+//        
+//        Supplier<String> supplier = () -> {
+//            sb.append("/" + (char) ai.incrementAndGet()); // Nicht gut, da Racecondition möglich!
+//            return sb.toString();
+//        };
                             
         System.out.println("*** A5:");
-        Stream.generate(supplier)
-            .limit(4)
-            .forEach(System.out::println);              
+        
+        UnaryOperator<String> op = s -> {
+            char lastChar = s.charAt(s.length()-1);
+            return s + "/" + ++lastChar;
+        };
+        
+        Stream.iterate("/a", op)
+                .limit(4)
+                .forEach(System.out::println);
+//        
+//        Stream.generate(supplier)
+//            .limit(4)
+//            .forEach(System.out::println);              
         // B
 
     } // end of main
