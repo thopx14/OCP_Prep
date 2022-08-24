@@ -6,6 +6,9 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+/**
+ * see StreamCountMinMaxTests.java for unit tests!
+ */
 public class StreamCountMinMax {
 
     private static final Locale[] locales = Locale.getAvailableLocales();
