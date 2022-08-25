@@ -53,6 +53,5 @@ public class B04_StreamTerminalOperations {
 
         System.out.println( b ); // true
 
-        
     }
 }

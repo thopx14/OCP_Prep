@@ -27,11 +27,8 @@ public class StreamCountMinMax {
     }
 
     public static Optional<Locale> a3() {
-        Comparator<Locale> cmp = ( loc1, loc2 ) ->
-                loc1.getDisplayLanguage().compareTo( loc2.getDisplayLanguage() );
-
         return Stream.of( Locale.getAvailableLocales() )
                 .filter( l -> l.getDisplayCountry().contains( "t" ) )
-                .min( cmp );
+                .min( Comparator.comparing( Locale::getDisplayLanguage ) );
     }
 }
