@@ -32,7 +32,7 @@ public class Warenkorb {
         return this.warenkorb.stream()
                 .map( Bestellung::getProdukte )
                 .flatMap( Collection::stream )
-                .mapToInt( p -> p.getPreis() * p.getAnzahl() )
+                .mapToInt( Produkt::getPreis )
                 .sum();
     }
 }

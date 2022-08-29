@@ -7,7 +7,6 @@ public class Produkt {
 
     private final String name;
     private final int preis;
-    private final int anzahl;
 
     private static class Preise {
         private static final Map<String, Integer> preise = new HashMap<>();
@@ -30,15 +29,14 @@ public class Produkt {
 
     public Produkt( String name, int anzahl ) {
         this.name = name;
-        this.preis = Preise.getPreis( name );
-        this.anzahl = anzahl;
+        this.preis = Preise.getPreis( name ) * anzahl;
     }
 
     public int getPreis() {
         return preis;
     }
 
-    public int getAnzahl() {
-        return anzahl;
+    public String getName() {
+        return name;
     }
 }

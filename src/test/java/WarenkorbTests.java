@@ -24,7 +24,7 @@ public class WarenkorbTests {
         int expected = 0;
         for ( Bestellung bestellung : warenkorb.getWarenkorb() ) {
             for ( Produkt produkt : bestellung.getProdukte() ) {
-                expected += produkt.getPreis() * produkt.getAnzahl();
+                expected += produkt.getPreis();
             }
         }
 
@@ -40,7 +40,7 @@ public class WarenkorbTests {
         int expected = 0;
         for ( Bestellung bestellung : warenkorb.getWarenkorb() ) {
             for ( Produkt produkt : bestellung.getProdukte() ) {
-                expected += produkt.getPreis() * produkt.getAnzahl();
+                expected += produkt.getPreis();
             }
         }
 
