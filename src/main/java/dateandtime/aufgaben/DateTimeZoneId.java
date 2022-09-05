@@ -1,7 +1,10 @@
 package dateandtime.aufgaben;
 
-import java.io.BufferedWriter;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
 import java.io.IOException;
+import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.ZoneId;
@@ -17,11 +20,11 @@ public class DateTimeZoneId {
         // A1 + A2
         groupedZoneIds.forEach( ( k, v ) -> System.out.println( k + ": " + v ) );
         //A3
-        saveGroupedIdsToFile( groupedZoneIds, Path.of( "." ) );
+        saveGroupedIdsToFile( groupedZoneIds, Path.of( "./timezones.txt" ) );
 
     }
 
-    private static Map<String, List<String>> extractZoneIdsByCountryName() {
+    public static Map<String, List<String>> extractZoneIdsByCountryName() {
         Set<String> availableZoneIds = ZoneId.getAvailableZoneIds();
         return availableZoneIds.stream() // Stream<String>
                 .collect( Collectors.groupingBy(
@@ -34,23 +37,16 @@ public class DateTimeZoneId {
                 ) );
     }
 
-    private static void saveGroupedIdsToFile( Map<String, List<String>> map, Path p ) {
-        for ( String k : map.keySet() ) {
-            Path pathToNewFile = p.resolve( Path.of( k + ".txt" ) );
-            List<String> zones = map.get( k );
+    public static void saveGroupedIdsToFile( Map<String, List<String>> map, Path p ) {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable( SerializationFeature.INDENT_OUTPUT );
 
-            try ( BufferedWriter writer = Files.newBufferedWriter( pathToNewFile ) ) {
+        try {
+            Writer writer = Files.newBufferedWriter( p );
+            mapper.writeValue( writer, map );
 
-                writer.write( k + ":" );
-                writer.newLine();
-                for ( String zone : zones ) {
-                    writer.write( "**" + zone );
-                    writer.newLine();
-                }
-
-            } catch ( IOException e ) {
-                e.printStackTrace();
-            }
+        } catch ( IOException e ) {
+            e.printStackTrace();
         }
     }
 }
