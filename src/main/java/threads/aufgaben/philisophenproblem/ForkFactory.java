@@ -1,7 +1,6 @@
 package threads.aufgaben.philisophenproblem;
 
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
@@ -59,9 +58,14 @@ public class ForkFactory {
     }
 
     public void releaseFork() {
-        synchronized ( forkList ) {
-            forkList.get( new Random().nextInt( forkList.size() - 1 ) ).setInUse( false );
-            forkList.notifyAll();
+        for ( Fork fork : forkList ) {
+            synchronized ( forkList ) {
+                if ( fork.isInUse() ) {
+                    fork.setInUse( false );
+                    forkList.notifyAll();
+                    break;
+                }
+            }
         }
     }
 
@@ -69,7 +73,12 @@ public class ForkFactory {
         boolean tryToLock = lock.tryLock();
         if ( tryToLock ) {
             try {
-                forkList.get( new Random().nextInt( forkList.size() - 1 ) ).setInUse( false );
+                for ( Fork fork : forkList ) {
+                    if ( fork.isInUse() ) {
+                        fork.setInUse( false );
+                        break;
+                    }
+                }
             } finally {
                 lock.unlock();
             }

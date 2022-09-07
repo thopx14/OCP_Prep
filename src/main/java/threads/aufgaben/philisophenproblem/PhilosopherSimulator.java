@@ -24,11 +24,11 @@ public class PhilosopherSimulator {
                         System.out.println( p );
                         switch ( action ) {
                             case TAKING_LEFT_FORK, TAKING_RIGHT_FORK ->
-//                                    forkFactory.aquireForkNoDeadlock();
-                                    forkFactory.aquireFork();
+                                    forkFactory.aquireForkNoDeadlock();
+//                                    forkFactory.aquireFork();
                             case RELEASE_LEFT_FORK, RELEASE_RIGHT_FORK ->
-//                                    forkFactory.releaseForkNoDeadlock();
-                                    forkFactory.releaseFork();
+                                    forkFactory.releaseForkNoDeadlock();
+//                                    forkFactory.releaseFork();
                         }
                         ThreadUtils.pauseMillis( 500 );
                     }
