@@ -41,13 +41,15 @@ public class ForkFactory {
         }
     }
 
-    public void aquireForkNoDeadlock() {
+    public boolean aquireForkNoDeadlock() {
         boolean tryToLock = lock.tryLock();
+        boolean aquireOkay = false;
         if ( tryToLock ) {
             try {
                 for ( Fork fork : forkList ) {
                     if ( !fork.isInUse() ) {
                         fork.setInUse( true );
+                        aquireOkay = true;
                         break;
                     }
                 }
@@ -55,6 +57,8 @@ public class ForkFactory {
                 lock.unlock();
             }
         }
+
+        return aquireOkay;
     }
 
     public void releaseFork() {
@@ -69,7 +73,7 @@ public class ForkFactory {
         }
     }
 
-    public void releaseForkNoDeadlock() {
+    public boolean releaseForkNoDeadlock() {
         boolean tryToLock = lock.tryLock();
         if ( tryToLock ) {
             try {
@@ -83,5 +87,6 @@ public class ForkFactory {
                 lock.unlock();
             }
         }
+        return tryToLock;
     }
 }
