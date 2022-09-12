@@ -21,8 +21,7 @@ public class ExecutorServiceSimple {
             callables.add( () -> ThreadLocalRandom.current().nextInt( 100 ) );
         }
         List<Future<Integer>> futureList = service.invokeAll( callables, 10, TimeUnit.SECONDS );
-        Future<Integer> resultInt = service.submit( () -> getSumOfFutureList( futureList ) );
-        System.out.println( "Sum of futures: " + resultInt.get() );
+        System.out.println( "Sum of futures: " + getSumOfFutureList( futureList ) );
 
         service.shutdown();
     }
