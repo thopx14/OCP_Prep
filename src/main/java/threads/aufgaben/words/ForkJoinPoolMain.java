@@ -13,5 +13,14 @@ public class ForkJoinPoolMain {
 
         List<String> wordsUpperCase = wordsTester.toUpperCaseList();
         FileUtils.safeToFile( wordsUpperCase, Path.of( "words_upper_forkjoinpool.txt" ), false );
+
+        List<String> passwords = Words.passwords();
+        String passwordToTest = "12345";
+        PasswordTester passwordTester = new PasswordTester( passwordToTest, passwords );
+        if ( passwordTester.doesPasswordMatch() ) {
+            System.out.println( "Passwort: " + passwordToTest + " found!" );
+        } else {
+            System.out.println( "Passwort: " + passwordToTest + " NOT found!" );
+        }
     }
 }
