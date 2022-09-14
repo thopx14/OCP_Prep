@@ -56,8 +56,7 @@ public class Main {
         List<Long> resultMultiThreaded = wordsTester.getResultMultiThreaded();
         long sum = resultMultiThreaded.stream().mapToLong( l -> l ).sum();
         System.out.println( "Words with 5 letters (multithreaded): " + sum );
-
-
+        
         executorService.shutdown();
     }
 }

@@ -1,14 +1,9 @@
 package threads.aufgaben;
 
+import io.aufgaben.FileUtils;
 import threads.aufgaben.words.Words;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
@@ -82,13 +77,13 @@ public class ForkJoinWords {
     public static void main( String[] args ) {
 
         List<String> words = Words.englishWords();
-        safeToFile( words, Path.of( "words_orig.txt" ), false );
+        FileUtils.safeToFile( words, Path.of( "words_orig.txt" ), false );
 
         ForkJoinPool forkJoinPool = new ForkJoinPool();
         RecursiveAction upperCaseAction = new ToUpperAction( words, 0, words.size() );
         forkJoinPool.invoke( upperCaseAction );
 
-        safeToFile( words, Path.of( "words_upper.txt" ), false );
+        FileUtils.safeToFile( words, Path.of( "words_upper.txt" ), false );
 
         words = Words.englishWords();
         String greatestString = getResult( forkJoinPool, new GreatesStringTask( words, 0, words.size() ) );
@@ -99,23 +94,4 @@ public class ForkJoinWords {
         return pool.invoke( task );
     }
 
-    static void safeToFile( List<String> stringList, Path path, boolean append ) {
-        List<StandardOpenOption> openOptions = new ArrayList<>();
-        openOptions.add( StandardOpenOption.CREATE );
-        openOptions.add( StandardOpenOption.TRUNCATE_EXISTING );
-        openOptions.add( StandardOpenOption.WRITE );
-        if ( append ) {
-            openOptions.remove( StandardOpenOption.TRUNCATE_EXISTING );
-            openOptions.add( StandardOpenOption.APPEND );
-        }
-        try ( BufferedWriter bufferedWriter = Files.newBufferedWriter( path, StandardCharsets.UTF_8, openOptions.toArray( StandardOpenOption[]::new ) ) ) {
-            for ( String s : stringList ) {
-                bufferedWriter.write( s );
-                bufferedWriter.newLine();
-            }
-
-        } catch ( IOException e ) {
-            e.printStackTrace();
-        }
-    }
 }

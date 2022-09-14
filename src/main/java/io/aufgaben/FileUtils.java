@@ -56,6 +56,26 @@ public class FileUtils {
         }
     }
 
+    public static void safeToFile( List<String> stringList, Path path, boolean append ) {
+        List<StandardOpenOption> openOptions = new ArrayList<>();
+        openOptions.add( StandardOpenOption.CREATE );
+        openOptions.add( StandardOpenOption.TRUNCATE_EXISTING );
+        openOptions.add( StandardOpenOption.WRITE );
+        if ( append ) {
+            openOptions.remove( StandardOpenOption.TRUNCATE_EXISTING );
+            openOptions.add( StandardOpenOption.APPEND );
+        }
+        try ( BufferedWriter bufferedWriter = Files.newBufferedWriter( path, StandardCharsets.UTF_8, openOptions.toArray( StandardOpenOption[]::new ) ) ) {
+            for ( String s : stringList ) {
+                bufferedWriter.write( s );
+                bufferedWriter.newLine();
+            }
+
+        } catch ( IOException e ) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main( String[] args ) throws IOException, URISyntaxException {
         URL UrlOftestTxt = FileUtils.class.getResource( "/test.txt" );
         Path testTxtString = Path.of( UrlOftestTxt.toURI() );
