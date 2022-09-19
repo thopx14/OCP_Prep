@@ -38,6 +38,7 @@ public class CyclicBarrierCount {
         ExecutorService executorService = Executors.newCachedThreadPool();
         executorService.execute( barrierTarget );
         executorService.execute( barrierTarget );
+//        executorService.execute( barrierTarget );
 
         executorService.shutdown();
 
